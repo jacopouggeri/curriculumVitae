@@ -1,0 +1,137 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{CormorantGaramond}
+    [2022/09/16 (Bob Tennent and autoinst)  Style file for Cormorant Garamond fonts.]
+
+\RequirePackage{ifxetex,ifluatex,xkeyval,textcomp}
+
+\newif\ifcormorantgaramond@ttf 
+\ifxetex
+  \cormorantgaramond@ttftrue
+\else\ifluatex
+  \cormorantgaramond@ttftrue
+\else  % [pdf]LaTeX
+  \cormorantgaramond@ttffalse
+\fi\fi
+
+\newif\ifcormorantgaramond@lining \cormorantgaramond@liningtrue
+\newif\ifcormorantgaramond@tabular \cormorantgaramond@tabularfalse
+\newif\ifcormorantgaramond@semibold \cormorantgaramond@semiboldfalse
+\newif\ifcormorantgaramond@medium \cormorantgaramond@mediumfalse
+\newif\ifcormorantgaramond@light \cormorantgaramond@lightfalse
+
+\newcommand*{\CormorantGaramond@scale}{1}
+\RequirePackage{xkeyval}
+\DeclareOptionX{scaled}{\renewcommand*{\CormorantGaramond@scale}{#1}}
+\DeclareOptionX{scale}{\renewcommand*{\CormorantGaramond@scale}{#1}}
+\DeclareOptionX{type1}{\cormorantgaramond@ttffalse}
+\DeclareOptionX{lining}{\cormorantgaramond@liningtrue}
+\DeclareOptionX{nf}{\cormorantgaramond@liningtrue}
+\DeclareOptionX{lf}{\cormorantgaramond@liningtrue}
+\DeclareOptionX{oldstyle}{\cormorantgaramond@liningfalse}
+\DeclareOptionX{osf}{\cormorantgaramond@liningfalse}
+\DeclareOptionX{tabular}{\cormorantgaramond@tabulartrue}
+\DeclareOptionX{t}{\cormorantgaramond@tabulartrue}
+\DeclareOptionX{proportional}{\cormorantgaramond@tabularfalse}
+\DeclareOptionX{p}{\cormorantgaramond@tabularfalse}
+\DeclareOptionX{semibold}{\cormorantgaramond@semiboldtrue}
+\DeclareOptionX{sb}{\cormorantgaramond@semiboldtrue}
+\DeclareOptionX{medium}{\cormorantgaramond@mediumtrue}
+\DeclareOptionX{light}{\cormorantgaramond@lighttrue}
+
+
+\ProcessOptionsX\relax
+
+\ifcormorantgaramond@ttf
+  \ifcormorantgaramond@lining
+    \def\cormorantgaramond@figurestyle{Lining}
+  \else
+    \def\cormorantgaramond@figurestyle{OldStyle} 
+  \fi
+  \ifcormorantgaramond@tabular
+    \def\cormorantgaramond@figurealign{Monospaced} 
+  \else
+    \def\cormorantgaramond@figurealign{} 
+  \fi
+\else % type1
+  \ifcormorantgaramond@lining
+    \def\cormorantgaramond@figurestyle{LF}
+  \else
+    \def\cormorantgaramond@figurestyle{OsF}
+  \fi
+  \ifcormorantgaramond@tabular
+    \def\cormorantgaramond@figurealign{T}
+  \else
+    \def\cormorantgaramond@figurealign{}
+  \fi
+\fi
+
+\ifcormorantgaramond@ttf
+  \def\cormorantgaramond@boldstyle{Bold}
+  \ifcormorantgaramond@semibold\def\cormorantgaramond@boldstyle{SemiBold}\fi
+  \ifcormorantgaramond@medium\def\cormorantgaramond@boldstyle{Medium}\fi
+  \def\cormorantgaramond@regstyle{Regular}
+  \ifcormorantgaramond@light\def\cormorantgaramond@regstyle{Light}\fi
+\else
+  \def\bfseries@rm{b}
+  \ifcormorantgaramond@semibold\def\bfseries@rm{sb}\fi
+  \ifcormorantgaramond@medium\def\bfseries@rm{medium}\fi
+  \def\mdseries@rm{m}
+  \ifcormorantgaramond@light\def\mdseries@rm{l}\fi
+\fi
+
+\ifcormorantgaramond@ttf
+  \RequirePackage{fontspec}
+\else
+  \RequirePackage{fontenc,fontaxes,mweights}
+\fi
+
+\ifcormorantgaramond@ttf
+  \defaultfontfeatures{
+        Ligatures = TeX ,
+        Scale     = \CormorantGaramond@scale ,
+        Extension = .ttf }
+  \def\cormorantgaramond@regular{Regular}
+  \setmainfont
+      [ Numbers = {\cormorantgaramond@figurealign,\cormorantgaramond@figurestyle},
+        UprightFont    = *-\cormorantgaramond@regstyle ,
+        ItalicFont     = *-\ifx\cormorantgaramond@regstyle\cormorantgaramond@regular Italic\else\cormorantgaramond@regstyle Italic\fi ,
+        BoldFont    = *-\cormorantgaramond@boldstyle ,
+        BoldItalicFont     = *-\cormorantgaramond@boldstyle Italic ,
+      ]
+      {CormorantGaramond}
+  \providecommand\sufigures{\addfontfeatures{VerticalPosition=Superior}}
+  \providecommand\infigures{\addfontfeatures{VerticalPosition=ScientificInferior}}
+  \DeclareTextFontCommand{\oldstylenums}{\addfontfeatures{Numbers=OldStyle}}
+  \DeclareTextFontCommand{\liningnums}{\addfontfeatures{Numbers=Lining}}
+  \DeclareTextFontCommand{\tabularnums}{\addfontfeatures{Numbers=Tabular}}
+  \DeclareTextFontCommand{\proportionalnums}{\addfontfeatures{Numbers=Lining}} % pnum not supported
+
+\else % type1
+
+  \def\cormorantgaramond@family{CormorantGaramond-\cormorantgaramond@figurealign\cormorantgaramond@figurestyle}
+  \renewcommand*\rmdefault{\cormorantgaramond@family}
+  \edef\seriesdefault{\mdseries@rm}
+
+  \fa@naming@exception{figures}{{superior}{proportional}}{Sup}
+  \fa@naming@exception{figures}{{superior}{tabular}}{Sup}
+  \def\sufigures{\@nomath\sufigures\fontfigurestyle{superior}\selectfont}
+
+  \fa@naming@exception{figures}{{inferior}{proportional}}{Inf}
+  \fa@naming@exception{figures}{{inferior}{tabular}}{Inf}
+  \def\infigures{\@nomath\infigures\fontfigurestyle{inferior}\selectfont}
+
+  \DeclareTextFontCommand{\oldstylenums}{\fontfamily{CormorantGaramond-\cormorantgaramond@figurealign OsF}\selectfont}
+  \DeclareTextFontCommand{\liningnums}{\fontfamily{CormorantGaramond-\cormorantgaramond@figurealign LF}\selectfont}
+  \DeclareTextFontCommand{\tabularnums}{\fontfamily{CormorantGaramond-T\cormorantgaramond@figurestyle}\selectfont}
+  \DeclareTextFontCommand{\proportionalnums}{\fontfamily{CormorantGaramond-\cormorantgaramond@figurestyle}\selectfont}
+
+\fi
+
+\DeclareTextFontCommand{\textsu}{\sufigures}
+\DeclareTextFontCommand{\textinf}{\infigures}
+
+\ifcormorantgaramond@ttf
+  \defaultfontfeatures{}
+\fi
+
+\endinput
