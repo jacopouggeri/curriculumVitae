@@ -32,6 +32,3 @@ if [ ${#missing_pages[@]} -gt 0 ]; then
         fi
     done
 fi
-
-git add png
-git add README.md
