@@ -2,4 +2,4 @@
 
 This is the latex project for my CV.
 
-![curriculum_vitae.pdf]
+[Curriculum Vitae](curriculum_vitae.pdf)
