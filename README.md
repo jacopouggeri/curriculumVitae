@@ -1,6 +1,6 @@
 # Curriculum Vitae
 
-This is the latex project for my CV.
+This is the LaTeX project for my CV.
 
 
 ![Page 1](png/curriculum_vitae-0.png)
