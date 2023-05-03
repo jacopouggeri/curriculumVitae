@@ -1,6 +1,6 @@
 # Generate png images to display in README.md
 
-FILENAME = "CurriculumVitae"  # or any other filename you want to use
+FILENAME = "CurriculumVitae"
 
 mkdir -p png/  # create the png/ directory if it does not already exist
 for pdfile in "${FILENAME}.pdf" ; do
