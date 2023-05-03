@@ -1,0 +1,97 @@
+% -------------------------------------------------------------------------
+% Font
+
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+%\usepackage{CormorantGaramond}
+\usepackage{fontspec}
+\setmainfont{Avenir Next}[BoldFont={Avenir Next Demi Bold}]
+
+\usepackage{fontmfizz}
+\usepackage{fontawesome5}
+
+\usepackage{graphicx}
+\usepackage[official]{eurosym}
+\usepackage{wrapfig}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+% -------------------------------------------------------------------------
+% Bib
+
+%\usepackage[style=numeric,sorting=ydnt,defernumbers,maxbibnames=20]{biblatex}
+% \addbibresource{publications.bib}
+%\AtEveryBibitem{\clearfield{url}}
+
+% -------------------------------------------------------------------------
+% Colors
+
+\usepackage{xcolor}
+% Define colors for social media links
+\definecolor{email}{RGB}{0, 0, 0}
+\definecolor{github}{RGB}{36, 41, 46}
+\definecolor{youtube}{RGB}{255, 0, 0}
+\definecolor{linkedin}{RGB}{0, 119, 181}
+\definecolor{attachment}{HTML}{67809f}
+
+\definecolor{flatBlue}{HTML}{3498db}
+\definecolor{flatGreen}{HTML}{2ecc71}
+\definecolor{flatRed}{HTML}{e74c3c}
+
+\definecolor{skillbg}{HTML}{CCCCCC}
+\definecolor{skillbar1}{HTML}{333333}
+\definecolor{skillbar2}{HTML}{555555}
+\definecolor{skillbar3}{HTML}{777777}
+\definecolor{skillbar4}{HTML}{999999}
+\definecolor{skillbar5}{HTML}{BBBBBB}
+
+% -------------------------------------------------------------------------
+% Custom Commands
+
+\newcommand{\rEntry}[1]{{\large\textbf{#1}}}
+\newcommand{\rSection}[1]{\section{\Large\centerline{#1}}}
+\newcommand{\sectionRule}{{\vspace{-6pt} \color{black} \hrulefill}}
+\newcommand{\attachment}{\textcolor{attachment}{\hspace{1pt}\faFile}}
+
+% -------------------------------------------------------------------------
+% Hyperlinks
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=flatBlue,
+    filecolor=flatGreen,      
+    urlcolor=flatRed,
+    citecolor=flatBlue,
+}
+
+% -------------------------------------------------------------------------
+% Packages
+
+\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{emoji}
+\usepackage{tabularx}
+\usepackage{comment}
+
+% -------------------------------------------------------------------------
+% Tikz
+
+\usetikzlibrary{shapes.misc}
+
+\newcommand{\skillbar}[1]{%
+  \begin{tikzpicture}[scale=0.5, transform shape, rounded rectangle west arc=0pt, rounded rectangle east arc=0pt, minimum width=5mm, minimum height=2mm]
+    \foreach \x in {1,2,3,4,5}{
+      \ifnum\x>#1
+        \fill [color=skillbg] (\x-1,0) rectangle (\x,0.4);
+      \else
+        \fill [color=skillbar\x] (\x-1,0) rectangle (\x,0.4);
+      \fi
+      \draw [color=skillbar\x, fill=none, line width=1pt, rounded corners=2pt] (\x-1,0) rectangle (\x,0.4);
+      \ifnum\x<5
+        \draw [color=skillbg, line width=0.5pt] (\x,0) -- (\x,0.4);
+      \fi
+    }
+  \end{tikzpicture}
+}
