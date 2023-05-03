@@ -7,7 +7,7 @@ for pdfile in CurriculumVitae.pdf ; do
     echo "Converting ${pdfile}"
     convert -density 500 -background white -alpha remove -alpha off "${pdfile}" "png/${pdfile%.*}.png"
 done
-
+git 
 # create an array of PNG filenames
 png_files=(png/CurriculumVitae-*.png)
 
