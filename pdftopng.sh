@@ -1,13 +1,15 @@
 # Generate png images to display in README.md
 
+FILENAME = CurriculumVitae
+
 mkdir -p png/  # create the png/ directory if it does not already exist
-for pdfile in curriculum_vitae.pdf ; do
+for pdfile in ${FILENAME}.pdf ; do
     echo "Converting ${pdfile}"
     convert -density 500 -background white -alpha remove -alpha off "${pdfile}" "png/${pdfile%.*}.png"
 done
 
 # create an array of PNG filenames
-png_files=(png/curriculum_vitae-*.png)
+png_files=(png/${FILENAME}-*.png)
 
 # check which pages are missing and add them to a list
 missing_pages=()
