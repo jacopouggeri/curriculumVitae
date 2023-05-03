@@ -107,11 +107,12 @@
   \begin{tikzpicture}[scale=0.55, transform shape, minimum width=5mm, minimum height=2mm]
     \foreach \x in {1,2,3,4,5}{
       \ifnum\x>#1
-        \draw [draw=skillEmpty, fill=none, line width=1.5pt, rounded corners=3pt] (\x*1.1-1.1,0) rectangle (\x*1.1,0.4);
+        \draw [draw=skillEmpty, fill=none, line width=1.5pt, rounded corners=3pt] (\x*1.15-1.15,0) rectangle (\x*1.15-0.05,0.4);
       \else
-        \draw [draw=skillFull, fill=skillFull, line width=1.5pt, rounded corners=3pt] (\x*1.1-1.1,0) rectangle (\x*1.1,0.4);
+        \draw [draw=skillFull, fill=skillFull, line width=1.5pt, rounded corners=3pt] (\x*1.15-1.15,0) rectangle (\x*1.15-0.05,0.4);
       \fi
     }
   \end{tikzpicture}
 }
+
 
