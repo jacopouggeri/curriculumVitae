@@ -9,7 +9,7 @@ for pdfile in ${FILENAME}.pdf ; do
 done
 
 # create an array of PNG filenames
-png_files=(png/${FILENAME}-*.png)
+png_files=(png/"${FILENAME}"-*.png)
 
 # check which pages are missing and add them to a list
 missing_pages=()
