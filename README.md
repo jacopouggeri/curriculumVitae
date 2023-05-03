@@ -2,4 +2,5 @@
 
 This is the LaTeX project for my CV.
 
-PNG preview:![Page 1](png/-*.png)
+PNG preview:
+![Page 1](png/-*.png)
