@@ -1,0 +1,22 @@
+%% start of file `cvicons.sty'.
+%% By Jacopo Uggeri (jacopo.uggeri@gmail.com).
+%
+% This is inspired by the fontmfizz.sty by Kevin Dungs
+% See https://ctan.org/pkg/fontmfizz
+%
+% This work may be distributed and/or modified under the
+% conditions of the MIT License, available at
+% http://opensource.org/licenses/MIT.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cvicons}
+
+\usepackage{fontspec}
+
+\newfontfamily{\CVI}{cvicons}
+\newcommand*{\cvicon}[1]{%
+  {FA\csname cvicon@#1\endcsname}}
+
+\expandafter\def\csname cvicon@cvMathematica\endcsname {\symbol{"E800}} \def\cvMathematica {{\CVI\csname cvicon@cvMathematica\endcsname}}
+
+\endinput
